@@ -1,3 +1,110 @@
-.hidden{
-    display: none;
+:root {
+    --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    --card-bg: rgba(255, 255, 255, 0.15);
+    --card-border: rgba(255, 255, 255, 0.25);
+    --text-color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+    transition: background 1s ease;
+}
+
+/* Background Canvas Positioning */
+#weatherCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* UI Content sitting above Canvas */
+h1, #searchForm, #errorMessage, #loadingIndicator, #weatherCard {
+    position: relative;
+    z-index: 10;
+}
+
+/* Dynamic Sky Gradients */
+body.weather-clear { background: linear-gradient(135deg, #2980b9 0%, #6dd5fa 100%) !important; }
+body.weather-rain { background: linear-gradient(135deg, #203a43 0%, #0f2027 100%) !important; }
+body.weather-clouds { background: linear-gradient(135deg, #3f4c6b 0%, #606c88 100%) !important; }
+body.weather-snow { background: linear-gradient(135deg, #83a4d4 0%, #b6fbff 100%) !important; }
+body.weather-night { background: linear-gradient(135deg, #020111 0%, #20202c 100%) !important; }
+body.weather-night-rain { background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%) !important; }
+
+h1 { font-size: 2.2rem;
+     font-weight: 700;
+      margin-bottom: 24px;
+       text-shadow: 0 2px 10px rgba(0,0,0,0.3); 
+    }
+
+#searchForm { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; max-width: 480px; margin-bottom: 20px; }
+
+#searchInput {
+    flex: 1 1 200px; padding: 12px 16px; font-size: 0.95rem; color: #fff;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 12px; backdrop-filter: blur(12px); outline: none;
+}
+
+#searchInput::placeholder { color: rgba(255,255,255,0.7); }
+
+button {
+    padding: 12px 18px; font-size: 0.9rem; font-weight: 600; color: #fff;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 12px; backdrop-filter: blur(12px); cursor: pointer; transition: 0.2s;
+}
+
+button:hover { background: rgba(255, 255, 255, 0.3); }
+
+#errorMessage {
+    width: 100%; max-width: 480px; padding: 12px; margin-bottom: 16px;
+    background: rgba(239, 68, 68, 0.3); border: 1px solid rgba(239, 68, 68, 0.5);
+    border-radius: 12px; text-align: center; backdrop-filter: blur(8px);
+}
+
+#weatherCard {
+    width: 100%; max-width: 480px; background: var(--card-bg);
+    border: 1px solid var(--card-border); border-radius: 20px; padding: 28px;
+    backdrop-filter: blur(16px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); text-align: center;
+}
+
+#cityName { font-size: 1.8rem; font-weight: 700; }
+#weatherDescription { font-size: 1rem; opacity: 0.9; text-transform: capitalize; margin-top: 4px; }
+.weather-main { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 20px 0; }
+#weatherIcon { width: 70px; height: 70px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
+#temperature { font-size: 3.5rem; font-weight: 800; }
+
+.weather-details {
+    list-style: none; display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--card-border);
+}
+
+.weather-details li { font-size: 0.8rem; opacity: 0.9; display: flex; flex-direction: column; gap: 4px; }
+.weather-details span { font-size: 1.1rem; font-weight: 700; }
+
+.hidden { display: none !important; }
+
+@media (max-width: 480px) {
+    #searchForm { flex-direction: column; }
+    button, #searchInput { width: 100%; }
+    .weather-details { grid-template-columns: 1fr; }
 }

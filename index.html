@@ -7,37 +7,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Real Canvas Overlay Backdrop -->
+    <canvas id="weatherCanvas"></canvas>
+
     <h1>Weather App</h1>
     
     <form action="" id="searchForm">
-        <input type="text"  id="searchInput" placeholder="Enter city name...">
-        <button id="searchButton">Search</button>
+        <input type="text" id="searchInput" placeholder="Enter city name...">
+        <button id="searchButton" type="submit">Search</button>
         <button id="unitToggle" class="unit-toggle" type="button">Switch to °F</button>
-
+        <button id="locateButton" type="button">Locate</button>
     </form>
+
     <p id="errorMessage" class="hidden"></p>
     <p id="loadingIndicator" class="hidden">Fetching weather...</p>
 
-
     <article id="weatherCard" class="hidden">
-  <header>
-    <h2 id="cityName">--</h2>
-    <p id="weatherDescription">--</p>
-  </header>
+        <header>
+            <h2 id="cityName">--</h2>
+            <p id="weatherDescription">--</p>
+        </header>
 
-  <div class="weather-main">
-    <img id="weatherIcon" src="" alt="Weather condition icon">
-    <p id="temperature">--</p>
-  </div>
+        <div class="weather-main">
+            <img id="weatherIcon" src="" alt="Weather condition icon">
+            <p id="temperature">--</p>
+        </div>
 
-  <ul class="weather-details">
-    <li>Feels Like: <span id="feelsLike">--</span></li>
-    <li>Humidity: <span id="humidity">--</span></li>
-    <li>Wind Speed: <span id="windSpeed">--</span></li>
-  </ul>
-</article>
+        <ul class="weather-details">
+            <li>Feels Like: <span id="feelsLike">--</span></li>
+            <li>Humidity: <span id="humidity">--</span></li>
+            <li>Wind Speed: <span id="windSpeed">--</span></li>
+        </ul>
+    </article>
 
     <script src="script.js"></script>
-    
 </body>
 </html>
