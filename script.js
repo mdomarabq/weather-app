@@ -17,7 +17,7 @@ const unitToggle = document.getElementById("unitToggle");
 const locateButton = document.getElementById("locateButton");
 
 const API_key = "7c911b98e7ef4e08a08205012262109";
-const BASE_URL = "http://api.weatherapi.com/v1/current.json";
+const BASE_URL = "https://api.weatherapi.com/v1/current.json";
 
 let currentUnit = "C";
 let currentWeatherData;
